@@ -1,16 +1,76 @@
 import { View, Text } from '@tarojs/components'
 import { useLoad } from '@tarojs/taro'
+import { useState } from 'react'
 import './index.less'
+import { BrowserRouter, Routes, Route, Outlet, Navigate } from 'react-router-dom'
+import { AtTabBar } from 'taro-ui'
+import Home from '../home';
+import User from '../user';
 
 export default function Index() {
 
   useLoad(() => {
     console.log('Page loaded.')
+    setTimeout(() => {
+      setInit(true)
+    }, 1000)
   })
 
+  const [init, setInit] = useState(false);
+
+  // Route
+  const MyRoute = () => {
+
+    const loader = () => {
+      console.log('!!')
+    }
+
+    return (
+      <BrowserRouter basename='pages/index/index'>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+                <Route index element={<Home />}></Route>
+                <Route path="user" element={<User />}></Route>
+            </Route>
+          </Routes>
+      </BrowserRouter>
+    )
+  }
+
+  // Layout
+  const Layout = () => {
+
+    const [curRoute, setCurRoute] = useState(0);
+
+    const cusRoutes = [
+      { title: 'Home', path: '/' },
+      { title: 'User', path: '/user' },
+    ]
+
+    const goRoute = (v) => {
+      setCurRoute(v);
+    }
+    return (
+      <View className='index-children-page'>
+          <Outlet />
+          <Navigate to={cusRoutes[curRoute].path} replace={true}></Navigate>
+          <AtTabBar
+            fixed
+            tabList={cusRoutes}
+            onClick={goRoute}
+            current={curRoute}
+            ></AtTabBar>
+      </View>
+    )
+  }
+
   return (
-    <View className='index'>
-      <Text>Hello world!</Text>
+    <View className='index-page'>
+      {
+        !init ?
+        <Text>Loading...</Text> :
+        <MyRoute />
+      }
     </View>
   )
 }

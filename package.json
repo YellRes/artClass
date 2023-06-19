@@ -53,6 +53,7 @@
     "@tarojs/taro": "3.6.7",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-router-dom": "^6.13.0",
     "taro-ui": "^3.1.0-beta.5"
   },
   "devDependencies": {
