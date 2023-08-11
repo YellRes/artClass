@@ -1,5 +1,5 @@
 import { View, Text } from '@tarojs/components'
-import { useLoad } from '@tarojs/taro'
+import { useLoad, navigateTo} from '@tarojs/taro'
 import { useState } from 'react'
 import './index.less'
 import { BrowserRouter, Routes, Route, Outlet, Navigate } from 'react-router-dom'
