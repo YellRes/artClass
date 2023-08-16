@@ -25,7 +25,7 @@ export default function Index() {
 
   return (
     <View className='index'>
-      <Image src={loginImg} />
+      <Image src={loginImg}  />
       <View className='text-center text-slate-500 text-lg font-bold'>
         <Text  >闳约深美  美美与共</Text>
       </View>
