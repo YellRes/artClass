@@ -8,13 +8,13 @@ export const handleResponse = <T>(
 ) => {
   const { status } = response.data;
 
-  if (status === 0) {
-    return response.data.data;
-  } else {
+  if (status !== 0) {
     showToast({
       title: response.data.message,
       icon: "none",
       duration: 2000,
     });
   }
+
+  return response.data.data;
 };
