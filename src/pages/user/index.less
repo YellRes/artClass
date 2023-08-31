@@ -1,0 +1,44 @@
+.user-page {
+    .user-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: #fff;
+        height: 16rem;
+        background: linear-gradient(#191919, #6b625f);
+        .user-avatar {
+            padding: 0 1rem;
+            img {
+                padding: .05rem;
+                background-color: #fff;
+                width: 5rem;
+                height: 5rem;
+                border-radius: 50%;
+            }
+        }
+        .user-status {
+            margin-top: .2rem;
+            text-align: center;
+            font-size: .7rem;
+            border-radius: 1rem;
+            background-color: #988080;
+        }
+    }
+    .class-info {
+        display: flex;
+        flex-direction: row;
+        margin-top: 1rem;
+        > * {
+            flex: 1;
+            text-align: center;
+        }
+    }
+    .banner {
+        margin-top: 1rem;
+        height: 6rem;
+        overflow: hidden;
+    }
+    .class-table {
+        margin-top: 1rem;
+    }
+}
