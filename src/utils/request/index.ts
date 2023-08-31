@@ -6,13 +6,16 @@ export const request = <T>(options: requestType) => {
   const { url, data, method = "GET" } = options;
 
   let contentType = "application/json";
-  if (method === "POST") {
-    contentType = "application/x-www-form-urlencoded";
-  }
+  // if (method === "POST") {
+  //   contentType = "application/x-www-form-urlencoded";
+  // }
+
   return new Promise<T>((res, rej) => {
     taroRequest({
-      url,
+      url: "/artClass" + url,
       data,
+      method,
+      mode: "cors",
       header: {
         "content-type": contentType,
       },

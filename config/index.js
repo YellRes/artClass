@@ -78,7 +78,7 @@ const config = {
       },
     },
     router: {
-      mode: 'browser'
+      mode: "browser",
     },
     esnextModules: ["taro-ui"],
   },
