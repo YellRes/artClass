@@ -1,4 +1,4 @@
-import { request as taroRequest } from "@tarojs/taro";
+import { request as taroRequest, getStorageSync } from "@tarojs/taro";
 import { handleResponse } from "./response";
 import type { requestType, ResponseType } from "./type";
 
@@ -18,6 +18,7 @@ export const request = <T>(options: requestType) => {
       mode: "cors",
       header: {
         "content-type": contentType,
+        Authorization: `Bear ${getStorageSync("token")}`,
       },
       success: (
         result: Taro.request.SuccessCallbackResult<ResponseType<T>>

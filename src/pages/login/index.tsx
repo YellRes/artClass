@@ -1,4 +1,4 @@
-import { useLoad, redirectTo } from "@tarojs/taro";
+import { useLoad, redirectTo, showToast, setStorageSync } from "@tarojs/taro";
 
 // 组件
 import { View, Text, Image } from '@tarojs/components'
@@ -30,17 +30,32 @@ export default function Index() {
   }
 
   // 验证表单
-  const validateForm = () => new Promise()
+  const validateForm = () => new Promise((res, rej) => { 
+    if (!phone) { 
+      showToast({title: '请输入手机号', icon: "none",})
+      return rej(false)
+    }
+
+    if (!password) { 
+      showToast({title: '请输入密码', icon: "none",})
+      return rej(false)
+    }
+
+    return res(true)
+  })
 
   // 登录
   const toLogin = async () => { 
 
-    await validateForm()
     try { 
-      await loginRequest({
+      await validateForm()
+      let res = await loginRequest({
         name: phone,
         password
       })
+
+      // 设置缓存
+      setStorageSync('token', res || '')
 
       redirectTo({
         url: '/pages/index/index'
@@ -48,9 +63,6 @@ export default function Index() {
     } catch (e) {
       console.log(e)
     }
-    
-
-  
   }
 
   return (
