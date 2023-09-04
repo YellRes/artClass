@@ -1,9 +1,13 @@
 import { View, Text } from '@tarojs/components'
 import { useLoad, navigateTo} from '@tarojs/taro'
 import { useState } from 'react'
+import { RecoilRoot } from 'recoil'
+import Auth from "@/components/Auth/index";
 import './index.less'
 import { BrowserRouter, Routes, Route, Outlet, Navigate } from 'react-router-dom'
 import { AtTabBar } from 'taro-ui'
+
+
 import Home from '../home';
 import User from '../user';
 
@@ -26,14 +30,19 @@ export default function Index() {
     }
 
     return (
-      <BrowserRouter basename='pages/index/index'>
+
+      <RecoilRoot>
+        <BrowserRouter basename='pages/index/index'>
           <Routes>
-            <Route path="/" element={<Layout />}>
-                <Route index element={<Home />}></Route>
-                <Route path="user" element={<User />}></Route>
-            </Route>
-          </Routes>
-      </BrowserRouter>
+            <Auth>
+              <Route path='/' element={<Layout />}>
+                  <Route index element={<Home />}></Route>
+                  <Route path='user' element={<User />}></Route>
+              </Route>
+            </Auth>
+            </Routes>
+          </BrowserRouter>
+      </RecoilRoot>
     )
   }
 
@@ -53,13 +62,13 @@ export default function Index() {
     return (
       <View className='index-children-page'>
           <Outlet />
-          <Navigate to={cusRoutes[curRoute].path} replace={true}></Navigate>
+          <Navigate to={cusRoutes[curRoute].path} replace></Navigate>
           <AtTabBar
             fixed
             tabList={cusRoutes}
             onClick={goRoute}
             current={curRoute}
-            ></AtTabBar>
+          ></AtTabBar>
       </View>
     )
   }

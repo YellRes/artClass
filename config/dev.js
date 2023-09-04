@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     NODE_ENV: '"development"',
-    TARO_APP_Request_URL: "http://10.10.10.52:3000",
+    TARO_APP_Request_URL: '"http://localhost:3000"',
   },
   defineConstants: {},
   // mini: {},
