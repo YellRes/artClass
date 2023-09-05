@@ -1,4 +1,4 @@
-import { useLoad, redirectTo } from "@tarojs/taro";
+import { useLoad, redirectTo, setStorageSync } from "@tarojs/taro";
 
 // 组件
 import { View, Text, Image } from '@tarojs/components'
@@ -6,21 +6,24 @@ import { AtForm, AtInput, AtButton } from 'taro-ui'
 
 // 方法
 import { useState } from 'react'
-
+import { useRecoilState } from 'recoil'
+import {userState } from '@/components/Auth/authCheck'
 import { loginRequest } from '@/apis/login'
+
+// ts type
+import { LoginProps } from './index.d'
 import loginImg from '@/assets/images/login/login.jpg'
-
-
 import './index.less'
 
-export default function Index() {
+export default function Index(props: LoginProps) {
+  const { redirectPath } = props
   const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
+  const [loginState, setLoginState] = useRecoilState(userState)
   useLoad(() => {
     console.log('Page loaded.')
   })
 
-  // TODO: 需要ref来优化
   const handlePhoneChange = (val) => { 
     setPhone(val)
   }
@@ -35,22 +38,30 @@ export default function Index() {
   // 登录
   const toLogin = async () => { 
 
-    await validateForm()
+    // await validateForm()
     try { 
-      await loginRequest({
+      debugger
+      let res = await loginRequest({
         name: phone,
         password
       })
 
-      redirectTo({
-        url: '/pages/index/index'
+      setLoginState({
+        token: res
       })
+      setStorageSync('token', res)
+
+      if (process.env.TARO_ENV === 'h5') {
+        window.location.reload()
+      } else { 
+        redirectTo({
+          url: redirectPath || 'pages/index/index'
+        })
+      }
     } catch (e) {
+      debugger
       console.log(e)
     }
-    
-
-  
   }
 
   return (

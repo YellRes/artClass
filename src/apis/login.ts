@@ -7,7 +7,7 @@ interface IUserParams {
 
 // 登录
 export const loginRequest = (params: IUserParams) =>
-  request({
+  request<string>({
     url: "/login",
     method: "POST",
     data: params,

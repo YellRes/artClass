@@ -1,8 +1,9 @@
 import { atom, selector } from "recoil";
+import { getStorageSync } from "@tarojs/taro";
 
-export const userState = atom({
+export const userState = atom<Record<string, any> | null>({
   key: "userState",
-  default: null,
+  default: getStorageSync("token") || null,
 });
 
 export const isLoggedInState = selector({

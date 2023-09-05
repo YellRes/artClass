@@ -33,14 +33,16 @@ export default function Index() {
 
       <RecoilRoot>
         <BrowserRouter basename='pages/index/index'>
+        <Auth>
           <Routes>
-            <Auth>
+           
               <Route path='/' element={<Layout />}>
                   <Route index element={<Home />}></Route>
                   <Route path='user' element={<User />}></Route>
               </Route>
-            </Auth>
             </Routes>
+            </Auth>
+
           </BrowserRouter>
       </RecoilRoot>
     )
