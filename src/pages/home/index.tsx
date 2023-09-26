@@ -38,26 +38,26 @@ export default function Home () {
 
     useEffect(() => {
         setSwipers([
-            { img: CImg },
-            { img: CImg },
-            { img: CImg },
+            { img: CImg, href: '1' },
+            { img: CImg, href: '2' },
+            { img: CImg, href: '3' },
         ])
         setCards([
             { title: 'xxx作图', img: CImg, userName: 'user1', avatar: AImg, id: '1' },
             { title: '2', img: BImg, userName: 'user2', avatar: AImg, id: '2' },
             { title: '3', img: CImg, userName: 'user3', avatar: AImg, id: '3' },
-            { title: '3', img: BImg, userName: 'user3', avatar: AImg, id: '3' },
-            { title: '3', img: CImg, userName: 'user3', avatar: AImg, id: '3' },
-            { title: '3', img: CImg, userName: 'user3', avatar: AImg, id: '3' },
-            { title: '3', img: CImg, userName: 'user3', avatar: AImg, id: '3' },
-            { title: '3', img: BImg, userName: 'user3', avatar: AImg, id: '3' },
-            { title: '3', img: CImg, userName: 'user3', avatar: AImg, id: '3' },
-            { title: '3', img: CImg, userName: 'user3', avatar: AImg, id: '3' },
-            { title: '3', img: BImg, userName: 'user3', avatar: AImg, id: '3' },
-            { title: '3', img: CImg, userName: 'user3', avatar: AImg, id: '3' },
-            { title: '3', img: CImg, userName: 'user3', avatar: AImg, id: '3' },
-            { title: '3', img: BImg, userName: 'user3', avatar: AImg, id: '3' },
-            { title: '3', img: CImg, userName: 'user3', avatar: AImg, id: '3' },
+            { title: '3', img: BImg, userName: 'user3', avatar: AImg, id: '4' },
+            { title: '3', img: CImg, userName: 'user3', avatar: AImg, id: '5' },
+            { title: '3', img: CImg, userName: 'user3', avatar: AImg, id: '6' },
+            { title: '3', img: CImg, userName: 'user3', avatar: AImg, id: '7' },
+            { title: '3', img: BImg, userName: 'user3', avatar: AImg, id: '8' },
+            { title: '3', img: CImg, userName: 'user3', avatar: AImg, id: '9' },
+            { title: '3', img: CImg, userName: 'user3', avatar: AImg, id: '10' },
+            { title: '3', img: BImg, userName: 'user3', avatar: AImg, id: '11' },
+            { title: '3', img: CImg, userName: 'user3', avatar: AImg, id: '12' },
+            { title: '3', img: CImg, userName: 'user3', avatar: AImg, id: '13' },
+            { title: '3', img: BImg, userName: 'user3', avatar: AImg, id: '14' },
+            { title: '3', img: CImg, userName: 'user3', avatar: AImg, id: '15' },
         ])
     }, [])
 
@@ -84,7 +84,7 @@ export default function Home () {
                 {
                     swipers.map(item => {
                         return (
-                            <img className="swiper-img" src={item.img} />
+                            <img className="swiper-img" src={item.img} key={item.href} />
                         )
                     })
                 }
@@ -93,7 +93,7 @@ export default function Home () {
             <View className="card-list">
                 {
                     cards.map(item => {
-                        return (<Card info={item}>
+                        return (<Card info={item} key={item.id}>
                             <ContentFunc info={item} />
                         </Card>)
                     })

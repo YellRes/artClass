@@ -3,6 +3,7 @@ import { getCurrentPages } from '@tarojs/taro'
 import Login from '@/pages/login/index'
 import { useRecoilValue } from 'recoil'
 import { isLoggedInState } from './authCheck'
+import { View } from "@tarojs/components"
 
 // 用此组件包括下 需要登录的组件
 // 查询当前用户是否登录
@@ -13,9 +14,8 @@ export default function Index({children}) {
     const currentPage = pages[pages.length - 1]
  
     return (
-        
-            <div>
+        <View className='wrapper' id="wrapper">
             {isLoggedIn ? children : <Login redirectPath={currentPage.route} />}
-            </div>
+        </View>
     )
 }

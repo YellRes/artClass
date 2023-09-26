@@ -22,6 +22,7 @@ export default function CardComponent (props: Props) {
             note=''
             extra={info.extra}
             title={info.title}
+            key={info.id}
             >
             {props.children}
         </AtCard>

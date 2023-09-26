@@ -3,6 +3,7 @@ import { useLoad, redirectTo, showToast, setStorageSync } from "@tarojs/taro";
 // 组件
 import { View, Text, Image } from '@tarojs/components'
 import { AtForm, AtInput, AtButton } from 'taro-ui'
+import SignUp from './SignUp'
 
 // 方法
 import { useState } from 'react'
@@ -20,6 +21,7 @@ export default function Index(props: LoginProps) {
   const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
   const [loginState, setLoginState] = useRecoilState(userState)
+  const [showRegister, setShowRegister] = useState(false)
   useLoad(() => {
     console.log('Page loaded.')
   })
@@ -71,9 +73,12 @@ export default function Index(props: LoginProps) {
         })
       }
     } catch (e) {
-      debugger
       console.log(e)
     }
+  }
+
+  const SignUpCancel = () => {
+    setShowRegister(false)
   }
 
   return (
@@ -83,7 +88,7 @@ export default function Index(props: LoginProps) {
         <Text  >闳约深美  美美与共</Text>
       </View>
 
-      <View className='m-4 '>
+      {!showRegister ? <View className='m-4 '>
 
         <View className='text-xl font-bold text-center text-slate-500' >
           登录
@@ -101,9 +106,13 @@ export default function Index(props: LoginProps) {
 
         <View className='text-center text-sm flex flex-row-reverse relative'>
           <Text className='absolute left-1/2 -translate-x-1/2'>忘记密码</Text> 
-          <Text>注册</Text>
         </View>
-      </View>
+        <View className='text-center text-sm flex flex-row-reverse relative' onClick={() => setShowRegister(true)}>
+            <Text>注册</Text>
+        </View>
+
+      </View> :
+      <SignUp cancel={SignUpCancel} />}
     </View>
   )
 }

@@ -19,8 +19,8 @@ export default function SwiperComponent (props:Props) {
           autoplay={false}
         >
                 {
-                    props.children.map(item => {
-                        return (<SwiperItem>{item}</SwiperItem>)
+                    props.children.map((item, index) => {
+                        return (<SwiperItem key={index}>{item}</SwiperItem>)
                     })
                 }
         </Swiper>

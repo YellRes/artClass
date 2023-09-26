@@ -14,4 +14,8 @@ export const loginRequest = (params: IUserParams) =>
   });
 
 // 注册
-export const registerRequest = (params: any) => request(params);
+export const registerRequest = (params: any) => request({
+    url: '/register',
+    method: 'POST',
+    data: params
+});
