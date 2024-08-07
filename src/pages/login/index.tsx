@@ -59,11 +59,12 @@ export default function Index(props: LoginProps) {
         name: phone,
         password
       })
-
+      if (res.status === 200) {}
       setLoginState({
-        token: res
+        token: res.token
       })
-      setStorageSync('token', res)
+      setStorageSync('token', res.token)
+      setStorageSync('userInfo', res)
 
       if (process.env.TARO_ENV === 'h5') {
         window.location.reload()

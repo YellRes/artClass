@@ -18,7 +18,7 @@ export const request = <T>(options: requestType) => {
       mode: "cors",
       header: {
         "content-type": contentType,
-        Authorization: `Bear ${getStorageSync("token")}`,
+        Authorization: `Bearer ${getStorageSync("token")}`,
       },
       success: (
         result: Taro.request.SuccessCallbackResult<ResponseType<T>>

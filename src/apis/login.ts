@@ -5,9 +5,17 @@ interface IUserParams {
   password: string;
 }
 
+interface LoginResponse {
+  status: number;
+  name: string;
+  token: string;
+  nickname: string;
+  email: string;
+}
+
 // 登录
 export const loginRequest = (params: IUserParams) =>
-  request<string>({
+  request<LoginResponse>({
     url: "/login",
     method: "POST",
     data: params,
