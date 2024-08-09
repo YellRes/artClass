@@ -41,4 +41,30 @@
     .class-table {
         margin-top: 1rem;
     }
+    .flex__item-extra.extra {
+        position: absolute;
+        top: 0;
+        width: 1.8rem;
+        height: 1.8rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: -2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .extra-marks {
+            height: 1.8rem;
+            width: 1.8rem;
+            background: lightgreen;
+            border-radius: 50%;
+            position: unset;
+            transform: unset;
+            .mark {
+                display: none;
+            }
+        }
+    }
+    .block-page {
+        height: 2rem;
+    }
 }
