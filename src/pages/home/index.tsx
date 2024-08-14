@@ -1,9 +1,13 @@
-import { View, Text } from "@tarojs/components";
+import { View, Text  } from "@tarojs/components";
 import Swiper from '../../components/Swiper';
 import Card from '../../components/Card';
 import './index.less';
-import { useEffect, useState } from "react";
-import { AtIcon } from 'taro-ui'
+import { useEffect, useState, useCallback } from "react";
+import { AtIcon, AtLoadMore } from 'taro-ui'
+// import { } from '@tarojs/components'
+
+import { getImages } from '../../apis/home';
+
 
 import CImg from '../../assets/images/test/c.jpeg';
 import AImg from '../../assets/images/test/a.jpg';
@@ -35,8 +39,23 @@ export default function Home () {
 
     let [swipers, setSwipers] = useState([] as Array<_Swiper>);
     let [cards, setCards] = useState([] as Array<_Info>);
+    const [moreStatus, setMoreStatus] = useState<any>('more');
+    const [pages, setPages] = useState({page:1,size: 6,total:0});
+
+    const handleMoreClick = () => {
+        setMoreStatus('loading');
+        setTimeout(() => {
+            setMoreStatus('noMore')
+        })
+        console.log('load more');
+    },
+    _getImages = useCallback(async () => {
+        const res = await getImages({pages});
+        // setCards(res); // 初始化获取部分图片
+     }, [])
 
     useEffect(() => {
+        // _getImages();
         setSwipers([
             { img: CImg, href: '1' },
             { img: CImg, href: '2' },
@@ -77,6 +96,7 @@ export default function Home () {
             </View>
         )
     }
+    // const swiperChange = () => {}
     // Todo: 整成瀑布流试试
     return(
         <View className="home-page">
@@ -98,6 +118,12 @@ export default function Home () {
                         </Card>)
                     })
                 }
+            </View>
+            <View>
+                <AtLoadMore
+                    onClick={handleMoreClick}
+                    status={moreStatus}>
+                </AtLoadMore>
             </View>
             
         </View>

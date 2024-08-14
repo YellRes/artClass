@@ -3,6 +3,7 @@ import { useLoad, navigateTo, getStorageSync } from "@tarojs/taro";
 import { AtToast, AtCalendar, AtAccordion, AtList, AtListItem } from "taro-ui";
 import { useEffect, useState } from "react";
 import { getCourses } from '../../apis/user';
+import { createUserCourse } from '../../apis/course';
 
 import dayjs from 'dayjs';
 
@@ -37,7 +38,7 @@ export default function User () {
     };
 
     const [curCalendar, setCurCalendar] = useState<any>(null),
-    [curMarkDays, setCurMarkDays] = useState<any>([])
+    [curMarkDays, setCurMarkDays] = useState<any>([]);
 
     const monthChange = (v:string) => {
         console.log(`month: ${v}`);
@@ -113,6 +114,17 @@ export default function User () {
         });
         console.log('get_calander', _value);
         return _value || [];
+    },
+    createCourse = async () => {
+        const res = await createUserCourse({
+            name: 'course-api',
+            username: userInfo.name,
+            startTime: '2024-08-08',
+            endTime: '2024-10-10',
+            detail: [{week: 5, info: [{startTime: '09:00', endTime: '12:00', sort:1, name: 'course-api'}]}],
+            status: 0
+        });
+        console.log(`create-course: ${res}`);
     }
 
     useEffect(() => {
@@ -143,7 +155,7 @@ export default function User () {
                     <View>
                         <Text>{userInfo.nickname || userInfo.name}</Text>
                     </View>
-                    <View className='user-status'>
+                    <View className='user-status' onClick={createCourse}>
                         <Text>
                             UserStatus
                         </Text>
